@@ -1,0 +1,16 @@
+INSERT INTO products (title, price, stock) VALUES
+('Laptop', 899.99, 15),
+('Smartphone', 499.99, 25),
+('Headphones', 69.99, 50),
+('Smartwatch', 199.99, 30),
+('Gaming Console', 299.99, 20),
+('Tablet', 249.99, 10),
+('Bluetooth Speaker', 49.99, 40),
+('Wireless Mouse', 19.99, 100),
+('Keyboard', 29.99, 75),
+('Monitor', 149.99, 12),
+('Camera', 349.99, 8),
+('External Hard Drive', 79.99, 60),
+('Printer', 99.99, 18),
+('Smart Home Hub', 89.99, 22),
+('VR Headset', 399.99, 5);
