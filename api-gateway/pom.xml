@@ -8,11 +8,11 @@
 		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.microservice.ecomerce</groupId>
-	<artifactId>discovery_service</artifactId>
+	<groupId>com.microservice.eCommerce.api_gateway</groupId>
+	<artifactId>api-gateway</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>discovery_service</name>
-	<description>Demo project for Spring Boot</description>
+	<name>api-gateway</name>
+	<description>Api Gateway for eCommerce microservice</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -33,7 +33,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
 		<dependency>

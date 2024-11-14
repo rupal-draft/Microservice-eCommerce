@@ -1,5 +1,6 @@
 package com.microservice.eccomerce.inventory_service.controller;
 
+import com.microservice.eccomerce.inventory_service.client.OrderServiceClient;
 import com.microservice.eccomerce.inventory_service.dto.ProductDto;
 import com.microservice.eccomerce.inventory_service.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -16,24 +17,17 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/inventory")
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductService productService;
     private final RestClient restClient;
     private final DiscoveryClient discoveryClient;
+    private final OrderServiceClient orderServiceClient;
 
     @GetMapping("/fetch-orders")
     public String getOrders(){
-        ServiceInstance serviceInstance = discoveryClient
-                .getInstances("order-service")
-                .getFirst();
-
-        return restClient
-                .get()
-                .uri(serviceInstance.getUri()+"/api/v1/orders/inventory/send-orders")
-                .retrieve()
-                .body(String.class);
+        return orderServiceClient.getOrders();
     }
 
     @GetMapping
