@@ -1,5 +1,7 @@
 package com.microservice.eccomerce.inventory_service.service;
 
+import com.microservice.eccomerce.inventory_service.dto.OrderRequestDto;
+import com.microservice.eccomerce.inventory_service.dto.OrderRequestItemDto;
 import com.microservice.eccomerce.inventory_service.dto.ProductDto;
 import com.microservice.eccomerce.inventory_service.entity.Product;
 import com.microservice.eccomerce.inventory_service.exceptions.ResourceNotFound;
@@ -8,9 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -37,5 +39,24 @@ public class ProductServiceImpl implements ProductService{
                 .findById(id)
                 .orElseThrow(()->new ResourceNotFound("No product found"));
         return modelMapper.map(product,ProductDto.class);
+    }
+
+    @Override
+    @Transactional
+    public Double reduceStock(OrderRequestDto orderRequestDto) {
+        log.info("Reducing stock!!");
+        Double price = 0.0;
+        for(OrderRequestItemDto orderRequestItem : orderRequestDto.getItems()){
+            Product product = productRepository
+                    .findById(orderRequestItem.getProductId())
+                    .orElseThrow(()->new ResourceNotFound("No product found!!"));
+            if(product.getStock()<orderRequestItem.getQuantity()){
+                throw new RuntimeException("Insufficient stock!!");
+            }
+            product.setStock(product.getStock()-orderRequestItem.getQuantity());
+            productRepository.save(product);
+            price+=product.getPrice()*orderRequestItem.getQuantity();
+        }
+        return price;
     }
 }

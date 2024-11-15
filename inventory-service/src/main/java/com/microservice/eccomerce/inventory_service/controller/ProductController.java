@@ -1,16 +1,14 @@
 package com.microservice.eccomerce.inventory_service.controller;
 
 import com.microservice.eccomerce.inventory_service.client.OrderServiceClient;
+import com.microservice.eccomerce.inventory_service.dto.OrderRequestDto;
 import com.microservice.eccomerce.inventory_service.dto.ProductDto;
 import com.microservice.eccomerce.inventory_service.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
@@ -40,5 +38,11 @@ public class ProductController {
     public ResponseEntity<ProductDto> getProduct(@PathVariable Long id){
         ProductDto product = productService.getProductById(id);
         return ResponseEntity.ok(product);
+    }
+
+    @PutMapping("/reduce-stock")
+    public ResponseEntity<Double> reduceStock(@RequestBody OrderRequestDto orderRequestDto){
+        Double price = productService.reduceStock(orderRequestDto);
+        return ResponseEntity.ok(price);
     }
 }
