@@ -5,6 +5,7 @@ import com.microservice.eccomerce.order_service.service.OrderService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +16,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/core")
 @Slf4j
+@RefreshScope
 public class OrderController {
 
     private final OrderService orderService;
 
     @GetMapping("/inventory/send-orders")
-    public String getOrdersInInventory(){
-        return "Getting orders in inventory";
+    public String getOrdersInInventory(@RequestHeader(name = "X-User-Id") Long id){
+        return "Getting orders in inventory with user id: "+id;
     }
 
     @GetMapping
