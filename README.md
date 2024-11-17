@@ -71,6 +71,30 @@ Through this project, I have learned the following concepts:
 3. **Run the API Gateway** to route requests to the services.
 4. Make sure that **Spring Cloud Config Server** is running to fetch configuration from GitHub.
 
+### Config Service - application.yml
+
+```yaml
+spring.application.name: config-service
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/<your-username>/<your-repository>.git
+          username: <your-github-username>
+          password: <your-github-personal-access-token>
+          default-label: main
+
+server:
+  port: 4000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
 ## API Documentation
 
 For detailed API documentation, visit [Postman Documentation](https://documenter.getpostman.com/view/30415721/2sAYBPnF6q).
