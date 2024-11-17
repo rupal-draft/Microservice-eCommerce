@@ -12,6 +12,10 @@ This project is designed to demonstrate various concepts of **microservice archi
 1. **Orders Service**: Manages customer orders and related functionalities.
 2. **Product Inventory Service**: Handles product inventory, availability, and stock management.
 
+## API Documentation
+
+For detailed API documentation, visit [Postman Documentation](https://documenter.getpostman.com/view/30415721/2sAYBPnF6q).
+
 ## Key Learnings
 
 Through this project, I have learned the following concepts:
@@ -93,8 +97,3 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
-
-
-## API Documentation
-
-For detailed API documentation, visit [Postman Documentation](https://documenter.getpostman.com/view/30415721/2sAYBPnF6q).
